@@ -33,15 +33,20 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
       <div className="w-full max-w-md space-y-8">
-        <div className="text-center space-y-2">
-          <div className="mx-auto h-12 w-12 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-            <Lock className="h-6 w-6 text-primary-foreground" />
+        <div className="text-center space-y-3">
+          <div className="mx-auto h-20 w-20 bg-white rounded-2xl flex items-center justify-center shadow-xl border border-primary/10 overflow-hidden p-2">
+            <img src="/logo.png" alt="Latech Logo" className="h-full w-full object-contain" />
           </div>
-          <h1 className="text-3xl font-bold tracking-tight">Welcome Back</h1>
-          <p className="text-muted-foreground text-sm">
-            Enter your credentials to access the admin dashboard
-          </p>
+          <div className="space-y-1">
+            <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              Latech Admin
+            </h1>
+            <p className="text-muted-foreground text-sm font-medium">
+              لوحة التحكم - إدارة المتجر
+            </p>
+          </div>
         </div>
+
 
         <Card className="p-6 shadow-xl border-primary/10">
           <form onSubmit={handleLogin} className="space-y-4">

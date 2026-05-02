@@ -22,11 +22,14 @@ const Navbar = () => {
               <Menu className="h-5 w-5" />
             </Button>
             <div className="flex items-center gap-2 px-3">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">L</span>
+              <div className="h-9 w-9 rounded-lg overflow-hidden flex items-center justify-center border shadow-sm bg-white">
+                <img src="/logo.png" alt="Latech Logo" className="h-full w-full object-contain p-1" />
               </div>
-              <span className="self-center whitespace-nowrap text-xl font-bold">Latech Admin</span>
+              <span className="self-center whitespace-nowrap text-xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                Latech Admin
+              </span>
             </div>
+
           </div>
           
           <div className="flex items-center gap-4">

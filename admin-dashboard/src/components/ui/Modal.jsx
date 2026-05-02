@@ -20,11 +20,11 @@ const Modal = ({ isOpen, onClose, title, children, className }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             className={cn(
-              "relative z-10 w-full max-w-lg overflow-hidden rounded-xl bg-background shadow-2xl",
+              "relative z-10 w-full max-w-lg overflow-hidden rounded-xl bg-background shadow-2xl flex flex-col max-h-[90vh]",
               className
             )}
           >
-            <div className="flex items-center justify-between border-b px-6 py-4">
+            <div className="flex items-center justify-between border-b px-6 py-4 shrink-0">
               <h3 className="text-lg font-semibold">{title}</h3>
               <button
                 onClick={onClose}
@@ -33,12 +33,15 @@ const Modal = ({ isOpen, onClose, title, children, className }) => {
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <div className="p-6">{children}</div>
+            <div className="p-6 overflow-y-auto custom-scrollbar">
+              {children}
+            </div>
           </motion.div>
         </div>
       )}
     </AnimatePresence>
   )
 }
+
 
 export { Modal }

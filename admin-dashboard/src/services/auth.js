@@ -30,7 +30,30 @@ export const authService = {
     window.location.href = '/login'
   },
 
+  async getSession() {
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) return { data: { session: null } }
+
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', session.user.id)
+        .single()
+
+      if (profile && ['admin', 'staff'].includes(profile.role)) {
+        return { data: { session: { ...session, role: profile.role } } }
+      }
+      
+      return { data: { session: null } }
+    } catch (err) {
+      console.error('[Auth] Error getting session:', err)
+      return { data: { session: null } }
+    }
+  },
+
   onAuthStateChange(callback) {
+
     return supabase.auth.onAuthStateChange(async (_event, session) => {
       if (!session) {
         callback(null)

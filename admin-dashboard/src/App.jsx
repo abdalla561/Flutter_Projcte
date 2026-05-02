@@ -24,11 +24,22 @@ function App() {
   const [session, setSession] = useState(undefined) // undefined = still initializing
   
   useEffect(() => {
-    // onAuthStateChange fires INITIAL_SESSION immediately when a session exists
-    // and SIGNED_OUT when no session. This single listener handles everything.
-    const { data: { subscription } } = authService.onAuthStateChange((session) => {
-      console.log('[App] Session updated:', session ? 'logged in' : 'no session')
-      setSession(session) // null = logged out, object = logged in
+    // 1. Check for session immediately
+    const initAuth = async () => {
+      try {
+        const { data: { session: currentSession } } = await authService.getSession()
+        setSession(currentSession)
+      } catch (err) {
+        setSession(null)
+      }
+    }
+    
+    initAuth()
+
+    // 2. Listen for future changes
+    const { data: { subscription } } = authService.onAuthStateChange((newSession) => {
+      console.log('[App] Session updated:', newSession ? 'logged in' : 'no session')
+      setSession(newSession) // null = logged out, object = logged in
     })
 
     return () => subscription.unsubscribe()
@@ -42,6 +53,7 @@ function App() {
       </div>
     )
   }
+
 
   return (
     <BrowserRouter>
